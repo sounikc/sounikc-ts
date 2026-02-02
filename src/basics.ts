@@ -158,3 +158,60 @@ foo = [1, -1];
 foo = [1, -1, 0]; // ERROR - Type '[number, number, number]' is not assignable to type '[number, number]'
 
 console.log(foo);
+
+// ---- Type Casting ---- //
+// ------------------------- //
+
+// const inputEl = document.getElementById("input-id");
+
+// console.log(inputEl.value); // ERROR- 'inputEl' is possibly 'null'
+// to overcome the above error we need to add ! at the end
+
+// const inputEl = document.getElementById("input-id")!;
+// console.log(inputEl.value); //ERROR- Property 'value' does not exist on type 'HTMLElement'
+// to overcome the above error we need to do type casting
+const inputEl = document.getElementById('input-id')! as HTMLInputElement;
+console.log(inputEl?.value);
+
+// ----- Record utility ---- //
+// It is used when you dont know the exaxt types of a data elements/property
+// *** SYNTAX - Record<KeyType, ValueType> *** //
+
+let data: Record<string, string | number | boolean>;
+
+data = {
+  name: 'Sounik',
+  roll: 1,
+  isActive: false,
+};
+
+console.log(data);
+
+// FUNCTION Type //
+// SYNTAX - () => returnType
+
+type Human = {
+  firstName: string;
+  lastName: string;
+  getFullName: () => string; // funtion type
+};
+
+let person: Human = {
+  firstName: 'Sounik',
+  lastName: 'Chakraborty',
+  getFullName() {
+    return this.firstName + ' ' + this.lastName;
+  },
+};
+
+const fn = person.getFullName();
+console.log(fn);
+
+// ---- Type Unknown ---- //
+
+// ---- || vs ?? ---- //
+
+const input = '';
+
+console.log('check ||--->', input || false); // OUTPUT false
+console.log('check ??--->', input ?? false); // OUTPUT blank string
